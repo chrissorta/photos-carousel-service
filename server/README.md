@@ -1,4 +1,4 @@
-## Server API
+## Server API for Photos Carousel Service
 
 ### Get restaurant photos
   * GET `/api/restaurants/:id`
