@@ -25,19 +25,6 @@
     }
 ```
 
-### Add restaurant
-  * POST `/api/restaurants`
-
-**Success Status Code:** `201`
-
-**Request Body**: Expects JSON with the following keys.
-
-```json
-    {
-      "id": "Number",
-      "name": "String",
-    }
-```
 ### Add image to restaurant
   * POST `/api/restaurants/:restaurantId/images`
 
