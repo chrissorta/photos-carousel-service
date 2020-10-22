@@ -7,8 +7,8 @@ USE restaurant_photos;
 
 
 CREATE TABLE photo (
-    id uuid,
     restaurant_id int,
+    id uuid,
     user_id int,
     restaurant_name text,
     username text,
@@ -19,6 +19,16 @@ CREATE TABLE photo (
     description text,
     date date,
     category text,
-    PRIMARY KEY ((id, restaurant_id), date)
+    PRIMARY KEY ( restaurant_id, date)
 )
 WITH CLUSTERING ORDER BY (date DESC);
+
+
+COPY photo(id, restaurant_id,date,avatar,category,description,first_name,last_name,photo,restaurant_name,user_id,username) from '/Users/christophersorta/photos-carousel-service/database/CassandraSeed/cassData1.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+COPY photo(id, restaurant_id,date,avatar,category,description,first_name,last_name,photo,restaurant_name,user_id,username) from '/Users/christophersorta/photos-carousel-service/database/CassandraSeed/cassData2.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+
+COPY photo(id, restaurant_id,date,avatar,category,description,first_name,last_name,photo,restaurant_name,user_id,username) from '/Users/christophersorta/photos-carousel-service/database/CassandraSeed/cassData3.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+COPY photo(id, restaurant_id,date,avatar,category,description,first_name,last_name,photo,restaurant_name,user_id,username) from '/Users/christophersorta/photos-carousel-service/database/CassandraSeed/cassData4.csv' WITH DELIMITER=',' AND HEADER=TRUE;

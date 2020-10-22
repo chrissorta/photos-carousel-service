@@ -10,7 +10,7 @@ CREATE DATABASE restaurant_photos;
 -- We can create our user table
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
-  username VARCHAR(25) UNIQUE,
+  username VARCHAR(50),
   firstname VARCHAR(15),
   lastname VARCHAR(15),
   avatar VARCHAR(100)
@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS users (
 -- We can create our post table
 CREATE TABLE IF NOT EXISTS restaurants (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(25),
-  city VARCHAR(15),
-  state VARCHAR(11),
+  name VARCHAR(50),
+  city VARCHAR(25),
+  state VARCHAR(12),
   rating smallint
 );
 
@@ -34,3 +34,5 @@ CREATE TABLE IF NOT EXISTS photos (
   category VARCHAR(10),
   date DATE DEFAULT CURRENT_DATE
 );
+
+CREATE INDEX photos_by_restaurant_index ON photos (restaurantId);
