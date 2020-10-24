@@ -1,33 +1,38 @@
-DROP DATABASE IF EXISTS opentable;
+DROP DATABASE IF EXISTS restaurant_photos;
 
-CREATE DATABASE opentable;
+CREATE DATABASE restaurant_photos;
 
 -- Make sure we're using our `blog` database
-\c opentable;
+\c restaurant_photos;
 
 
 
 -- We can create our user table
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
-  username VARCHAR UNIQUE,
-  firstname VARCHAR,
-  lastname VARCHAR,
-  avatar VARCHAR
+  username VARCHAR(50),
+  firstname VARCHAR(15),
+  lastname VARCHAR(15),
+  avatar VARCHAR(100)
 );
 
 -- We can create our post table
 CREATE TABLE IF NOT EXISTS restaurants (
   id SERIAL PRIMARY KEY,
-  name VARCHAR
+  name VARCHAR(50),
+  city VARCHAR(25),
+  state VARCHAR(12),
+  rating smallint
 );
 
 CREATE TABLE IF NOT EXISTS photos (
   id SERIAL PRIMARY KEY,
   userId INTEGER REFERENCES users(id),
   restaurantId INTEGER REFERENCES restaurants(id),
-  photo VARCHAR,
+  photo VARCHAR(100),
   description VARCHAR,
-  category VARCHAR,
+  category VARCHAR(10),
   date DATE DEFAULT CURRENT_DATE
 );
+
+CREATE INDEX photos_by_restaurant_index ON photos (restaurantId);

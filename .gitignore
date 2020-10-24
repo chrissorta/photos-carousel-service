@@ -26,3 +26,5 @@ dist/
 
 # aws access keys file
 aws-credentials.json
+
+*.csv
