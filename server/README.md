@@ -49,12 +49,11 @@
 ```
 
 ### Update photo info
-  * PATCH `/api/restaurants/:restaurantId/image/:photoId`
+  * PATCH `/api/restaurants/:photoId`
 
 **Path Parameters:**
-  * `restaurantId` restaurant id
-  * `photoId` photo id
-  
+  * `photoId` photoId
+
 **Success Status Code:** `204`
 
 **Request Body**: Expects JSON with any of the following keys (include only keys to be updated)

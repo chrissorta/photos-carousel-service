@@ -36,3 +36,4 @@ CREATE TABLE IF NOT EXISTS photos (
 );
 
 CREATE INDEX photos_by_restaurant_index ON photos (restaurantId);
+CREATE INDEX user_id_index ON users (id);
