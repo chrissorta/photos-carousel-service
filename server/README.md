@@ -1,10 +1,10 @@
 ## Server API for Photos Carousel Service
 
 ### Get restaurant photos
-  * GET `/api/restaurants/:id`
+  * GET `/api/restaurants/:restaurantId/images`
 
 **Path Parameters:**
-  * `id` restaurant id
+  * `restaurantId` restaurant id
 
 **Success Status Code:** `200`
 
@@ -25,19 +25,6 @@
     }
 ```
 
-### Add restaurant
-  * POST `/api/restaurants`
-
-**Success Status Code:** `201`
-
-**Request Body**: Expects JSON with the following keys.
-
-```json
-    {
-      "id": "Number",
-      "name": "String",
-    }
-```
 ### Add image to restaurant
   * POST `/api/restaurants/:restaurantId/image`
 
@@ -51,7 +38,7 @@
 
 ```json
     {
-      "restaurant_id": "Number",
+
       "photo_id": "String",
       "photo": "String",
       "description": "String",
@@ -82,10 +69,11 @@
 ```
 
 ### Delete restaurant
-  * DELETE `/api/restaurant/:id`
+  * DELETE `/api/restaurant/:restaurantId/photo/:photoId`
 
 **Path Parameters:**
-  * `id` restaurant id
+  * `restaurantId` restaurant id
+  * `photoId` photo id
 
 **Success Status Code:** `204`
 
