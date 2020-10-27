@@ -39,7 +39,7 @@
     }
 ```
 ### Add image to restaurant
-  * POST `/api/restaurants/:restaurantId/images`
+  * POST `/api/restaurants/:restaurantId/image`
 
 **Path Parameters:**
 
@@ -62,10 +62,10 @@
 ```
 
 ### Update photo info
-  * PATCH `/api/restaurants/:restaurantId/:photoId`
+  * PATCH `/api/restaurants/:photoId`
 
 **Path Parameters:**
-  * `id` restaurant id
+  * `photoId` photoId
 
 **Success Status Code:** `204`
 

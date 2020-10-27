@@ -1,31 +1,61 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable arrow-body-style */
-/* eslint-disable no-console */
-const mongoose = require('mongoose');
+const { Client } = require('pg');
 
-mongoose.connect('mongodb://localhost:27017/photo-gallery');
-
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Successful connection to MongoDB!');
+const client = new Client({
+  user: 'christophersorta',
+  database: 'restaurant_photos'
 });
 
-const RestaurantSchema = mongoose.Schema({
-  name: String,
-  id: Number,
-  photos: [Object],
-}, { versionKey: false });
+client.connect()
+  .then(() => console.log('Successful connection to Postgresql'))
+  .catch((err) => console.log('error', err.stack));
 
-const RestaurantModel = mongoose.model('Restaurant', RestaurantSchema);
-
-const gatherPhotos = (restaurantId) => {
-  return RestaurantModel.find({ id: restaurantId }).exec();
+const getPhotos = (id, callback) => {
+  const query = `SELECT * FROM photos p join users u on p.userId = u.id WHERE p.restaurantId = ${id}`;
+  client.query(query, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, result.rows);
+    }
+  });
 };
 
-module.exports = {
-  RestaurantModel,
-  gatherPhotos,
+const postPhoto = (photoInfo, callback) => {
+  const query = 'INSERT INTO PHOTOS(userId, restaurantId, photo, description, category, date) values ($1,$2,$3,$4,$5,$6)';
+  const values = [photoInfo.userId, photoInfo.restaurantId, photoInfo.photo,
+    photoInfo.description, photoInfo.category, photoInfo.date];
+  client.query(query, values, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, result.rows);
+    }
+  });
 };
+
+const deletePhoto = (photoId, callback) => {
+  const query = `DELETE FROM PHOTOS where id=${photoId}`;
+  client.query(query, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, result.rows);
+    }
+  });
+};
+
+const updatePhoto = (photoInfo, callback) => {
+  const query = `UPDATE PHOTOS set photo=${photoInfo.photo}, description=${photoInfo.description}, category=${photoInfo.category} where restaurantId=${photoInfo.photoId}`;
+  client.query(query, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, result.rows);
+    }
+  });
+};
+
+module.exports.getPhotos = getPhotos;
+module.exports.postPhoto = postPhoto;
+module.exports.deletePhoto = deletePhoto;
+module.exports.updatePhoto = updatePhoto;
